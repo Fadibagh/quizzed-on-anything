@@ -13,12 +13,15 @@ while (True):
 
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=messages)
+        messages=messages,
+        max_tokens=800
+        )
 
+    input_tokens = completion.usage.total_tokens
+    print(f"Total tokens used (input + output): {input_tokens}")
     
     quiz = str(completion.choices[0].message.content)
     
-
     quiz = quiz.split('\n\nQuestion: ')
 
     if len(quiz) < 5:

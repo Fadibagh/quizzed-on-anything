@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="10" > -->
+    <title>Quiz-Me</title>
+    <link rel="stylesheet" href="/static/css/quiz-me.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-box-title">What do you want to be quizzed on?</h2>
+        <input class="text-box" type="text" id="quizTopic" placeholder="Enter a topic...">
+        <button class="get-quiz-button" onclick="getQuiz()">Get Quiz</button>
+    </div>
+
+    <div class="quiz" id="quizContainer"></div>
+
+    <script>
+        function getQuiz() {
+            const topic = document.getElementById('quizTopic').value;
+            fetch('http://127.0.0.1:5000/quiz', { // Change this URL to your deployed backend endpoint if not running locally
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ topic: topic }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayQuiz(data.quiz);
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayQuiz(quiz) {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = ''; // Clear previous quiz content
+
+            quiz.forEach((item, index) => {
+                const questionElem = document.createElement('div');
+                const questionParagraph = document.createElement('p');
+                questionParagraph.className = 'question';
+                questionParagraph.innerHTML = `<strong>Question ${index + 1}:</strong> ${item.question}`;
+                questionElem.appendChild(questionParagraph);
+
+                
+                const options = item.options.trim().split('\n');
+                
+                options.forEach((optionText) => {
+                    if (optionText.trim() === "") return;
+
+                    const optionButton = document.createElement('button');
+                    optionButton.textContent = optionText;
+                    optionButton.className = 'option';
+                    optionButton.onclick = function() {
+
+                        // disable all buttons when one of them is clicked
+                        const allOptions = questionElem.querySelectorAll('.option');
+                        allOptions.forEach(opt => {
+                            opt.disabled = true;
+                        });
+
+                        // checks if the button clicked is the right answer
+                        if (optionText[0].toLowerCase() === item.correct_answer[0].toLowerCase()) {
+                            optionButton.classList.add('button-correct');
+                        } else {
+                            optionButton.classList.add('button-wrong');
+                        }
+
+                        if (optionText[0].toLowerCase() !== item.correct_answer[0].toLowerCase()) {
+                            allOptions.forEach(opt => {
+                                if (opt.textContent[0].toLowerCase() === item.correctAnswer[0].toLowerCase()) {
+                                    option.classList.add('button-correct');
+                                }
+                            });
+                        }
+                    };
+                    questionElem.appendChild(optionButton);
+                });
+
+                container.appendChild(questionElem);
+            });
+        }
+
+
+    </script>
+
+</body>
+</html>

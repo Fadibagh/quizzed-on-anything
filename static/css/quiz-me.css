@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.text-box-title {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.text-box {
+    font-size: 2em;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5em;
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.get-quiz-button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(79,8,8);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3 ease;
+}
+
+.get-quiz-button:hover {
+    background-color: rgb(175, 95, 10);
+}
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.question {
+    font-size: 2em;
+
+}
+
+.option {
+    font-size: 2em;
+    margin: 10px;
+}
+
+.button-correct {
+    background-color: green;
+}
+
+.button-wrong {
+    background-color: red;
+}
