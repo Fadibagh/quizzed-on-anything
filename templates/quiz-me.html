@@ -40,6 +40,8 @@
         function displayQuiz(quiz) {
             const container = document.getElementById('quizContainer');
             container.innerHTML = ''; // Clear previous quiz content
+            let totalScore = 0;
+            let totalAnsweredQuestions = 0;
 
             quiz.forEach((item, index) => {
                 const questionElem = document.createElement('div');
@@ -47,8 +49,7 @@
                 questionParagraph.className = 'question';
                 questionParagraph.innerHTML = `<strong>Question ${index + 1}:</strong> ${item.question}`;
                 questionElem.appendChild(questionParagraph);
-
-                
+                const correct = item.correct_answer[0].toLowerCase();
                 const options = item.options.trim().split('\n');
                 
                 options.forEach((optionText) => {
@@ -58,6 +59,7 @@
                     optionButton.textContent = optionText;
                     optionButton.className = 'option';
                     optionButton.onclick = function() {
+                        totalAnsweredQuestions++;
 
                         // disable all buttons when one of them is clicked
                         const allOptions = questionElem.querySelectorAll('.option');
@@ -66,23 +68,34 @@
                         });
 
                         // checks if the button clicked is the right answer
-                        if (optionText[0].toLowerCase() === item.correct_answer[0].toLowerCase()) {
+                        if (optionText[0].toLowerCase() === correct) {
                             optionButton.classList.add('button-correct');
+                            totalScore++;
+                            
+
                         } else {
                             optionButton.classList.add('button-wrong');
-                        }
-
-                        if (optionText[0].toLowerCase() !== item.correct_answer[0].toLowerCase()) {
                             allOptions.forEach(opt => {
-                                if (opt.textContent[0].toLowerCase() === item.correctAnswer[0].toLowerCase()) {
-                                    option.classList.add('button-correct');
+                                if (opt.textContent[0].toLowerCase() === correct) {
+                                    opt.classList.add('button-correct');
                                 }
+                            });
+                        }
+                        if (totalAnsweredQuestions === 6) {
+                            const scoreElem = document.createElement('div');
+                            const scoreDisplay = document.createElement('p');
+                            scoreDisplay.className = 'score';
+                            scoreDisplay.innerHTML = `Score: ${totalScore} out of 6`;
+                            scoreElem.appendChild(scoreDisplay);
+                            container.appendChild(scoreElem);
+                            window.scrollTo({
+                                top: document.body.scrollHeight,
+                                behavior: 'smooth' // Optional: Adds a smooth scrolling effect
                             });
                         }
                     };
                     questionElem.appendChild(optionButton);
                 });
-
                 container.appendChild(questionElem);
             });
         }

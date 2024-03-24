@@ -56,3 +56,7 @@
 .button-wrong {
     background-color: red;
 }
+
+.score {
+    font-size: 2em;
+}
