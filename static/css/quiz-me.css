@@ -60,3 +60,22 @@
 .score {
     font-size: 2em;
 }
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-icon {
+    margin-top: 2em;
+    border: 0.25em solid #f3f3f3;
+    border-top: 0.25em solid #000000;
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    animation: spin 2s linear infinite;
+}

@@ -13,6 +13,7 @@
         <h2 class="text-box-title">What do you want to be quizzed on?</h2>
         <input class="text-box" type="text" id="quizTopic" placeholder="Enter a topic...">
         <button class="get-quiz-button" onclick="getQuiz()">Get Quiz</button>
+        <div id="loading-icon" class="hidden"></div>
     </div>
 
     <div class="quiz" id="quizContainer"></div>
@@ -20,6 +21,8 @@
     <script>
         function getQuiz() {
             const topic = document.getElementById('quizTopic').value;
+            document.getElementById('loading-icon').classList.remove('hidden');
+
             fetch('http://127.0.0.1:5000/quiz', { // Change this URL to your deployed backend endpoint if not running locally
                 method: 'POST',
                 headers: {
@@ -29,6 +32,7 @@
             })
             .then(response => response.json())
             .then(data => {
+                document.getElementById('loading-icon').classList.add('hidden');
                 displayQuiz(data.quiz);
 
             })
