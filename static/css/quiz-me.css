@@ -1,36 +1,42 @@
+body {
+    background-color: #f0f4f8; /* A soft, light blue-grey, easy on the eyes */
+    color: #333; /* A dark grey for text, ensures good readability */
+    font-family: 'Arial', sans-serif; /* Ensures text is easily readable */
+}
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.text-box-title {
-    font-size: 3em; /* 48px assuming base font-size of 16px */
-    margin-bottom: 0.625em; /* 10px */
+    padding: 1em; /* Adds some padding around the container for spacing */
 }
 
-.text-box {
-    font-size: 2em; /* 32px */
-    padding: 0.625em; /* 10px */
-    border: 2px solid #ddd;
-    border-radius: 5em; /* highly rounded */
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.25em; /* 20px */
+.text-box-title {
+    font-size: 3em;
+    margin-bottom: 0.625em;
+    color: #005792; /* A darker blue for titles, for better contrast */
+}
+
+.text-box, .quiz, .question, .option, .score {
+    background-color: #ffffff; /* A white background for content areas to stand out */
+    padding: 1em; /* Uniform padding for a cleaner look */
+    border-radius: 0.5em; /* Soft rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds depth with a subtle shadow */
 }
 
 .get-quiz-button {
-    font-size: 1.5em; /* 24px */
-    padding: 0.625em 1.25em; /* 10px 20px */
+    font-size: 1.5em;
+    padding: 0.625em 1.25em;
     border: none;
     border-radius: 5px;
-    background-color: rgb(79, 8, 8);
-    color: #fff;
+    background-color: #0077b6; /* A calming shade of blue */
+    color: #ffffff; /* White text for better visibility */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .get-quiz-button:hover {
-    background-color: rgb(175, 95, 10);
+    background-color: #005792; /* A slightly darker blue for hover effect */
 }
 
 .quiz {
