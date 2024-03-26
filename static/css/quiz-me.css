@@ -4,29 +4,29 @@
     align-items: center;
 }
 .text-box-title {
-    font-size: 3em;
-    margin-bottom: 10px;
+    font-size: 3em; /* 48px assuming base font-size of 16px */
+    margin-bottom: 0.625em; /* 10px */
 }
 
 .text-box {
-    font-size: 2em;
-    padding: 10px;
+    font-size: 2em; /* 32px */
+    padding: 0.625em; /* 10px */
     border: 2px solid #ddd;
-    border-radius: 5em;
-    background-color: #f9f9f9; 
+    border-radius: 5em; /* highly rounded */
+    background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 1.25em; /* 20px */
 }
 
 .get-quiz-button {
-    font-size: 1.5em;
-    padding: 10px 20px;
+    font-size: 1.5em; /* 24px */
+    padding: 0.625em 1.25em; /* 10px 20px */
     border: none;
     border-radius: 5px;
-    background-color: rgb(79,8,8);
+    background-color: rgb(79, 8, 8);
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3 ease;
+    transition: background-color 0.3s ease;
 }
 
 .get-quiz-button:hover {
@@ -39,14 +39,12 @@
     align-items: left;
 }
 
-.question {
-    font-size: 2em;
-
+.question, .option, .score {
+    font-size: 2em; /* 32px */
 }
 
 .option {
-    font-size: 2em;
-    margin: 10px;
+    margin: 0.625em; /* 10px */
 }
 
 .button-correct {
@@ -55,10 +53,6 @@
 
 .button-wrong {
     background-color: red;
-}
-
-.score {
-    font-size: 2em;
 }
 
 .hidden {
@@ -79,3 +73,39 @@
     height: 2.5em;
     animation: spin 2s linear infinite;
 }
+
+/* Responsive adjustments */
+@media (max-width: 37.5em) { /* 600px */
+    .text-box-title, .text-box, .question, .option, .score {
+        font-size: 1.5em; /* Adjusted for readability on small screens */
+    }
+    .text-box {
+        padding: 0.5em;
+        margin-bottom: 1em; /* Increase space between text boxes for better touch targets */
+        border-radius: 2.5em; /* Adjusted for a softer appearance on small screens */
+    }
+    .get-quiz-button, .option {
+        font-size: 1.25em; /* Slightly larger font for better readability */
+        padding: 0.5em 1em; /* Adjust padding for a better touch target size */
+        margin: 0.5em 0; /* Add margin to options for better separation */
+    }
+    .quiz {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch; /* Ensure questions and options stretch to full container width */
+    }
+    .question {
+        margin-bottom: 0.5em; /* Add some space below each question for clarity */
+    }
+    .option {
+        display: block; /* Ensure options are block-level for full width */
+        text-align: center; /* Center-align option text for better aesthetics */
+        margin-bottom: 0.5em; /* Add space below options for easier touch interaction */
+    }
+    #loading-icon {
+        margin-top: 1em;
+        width: 2em;
+        height: 2em;
+    }
+}
+
