@@ -21,6 +21,7 @@
     <script>
         function getQuiz() {
             const topic = document.getElementById('quizTopic').value;
+            console.log(topic);
             document.getElementById('loading-icon').classList.remove('hidden');
 
             fetch('https://quizzed-on-anything-90fedb3112ed.herokuapp.com', { // Change this URL to your deployed backend endpoint if not running locally
