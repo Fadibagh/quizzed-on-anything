@@ -11,6 +11,10 @@ body {
     padding: 1em; 
 }
 
+.description {
+    font-size: 1em;
+}
+
 .text-box-title {
     font-size: 3em;
     margin-bottom: 0.625em;
