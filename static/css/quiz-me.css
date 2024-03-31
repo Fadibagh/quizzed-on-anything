@@ -1,27 +1,27 @@
 body {
-    background-color: #f0f4f8; /* A soft, light blue-grey, easy on the eyes */
-    color: #333; /* A dark grey for text, ensures good readability */
-    font-family: 'Arial', sans-serif; /* Ensures text is easily readable */
+    background-color: #f0f4f8; 
+    color: #333; 
+    font-family: 'Arial', sans-serif;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1em; /* Adds some padding around the container for spacing */
+    padding: 1em; 
 }
 
 .text-box-title {
     font-size: 3em;
     margin-bottom: 0.625em;
-    color: #005792; /* A darker blue for titles, for better contrast */
+    color: #005792; 
 }
 
 .text-box, .quiz, .question, .option, .score {
-    background-color: #ffffff; /* A white background for content areas to stand out */
-    padding: 1em; /* Uniform padding for a cleaner look */
-    border-radius: 0.5em; /* Soft rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds depth with a subtle shadow */
+    background-color: #ffffff; 
+    padding: 1em; 
+    border-radius: 0.5em; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .get-quiz-button {
@@ -29,14 +29,15 @@ body {
     padding: 0.625em 1.25em;
     border: none;
     border-radius: 5px;
-    background-color: #0077b6; /* A calming shade of blue */
-    color: #ffffff; /* White text for better visibility */
+    background-color: #0077b6; 
+    color: #ffffff; 
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 0.5em;
 }
 
 .get-quiz-button:hover {
-    background-color: #005792; /* A slightly darker blue for hover effect */
+    background-color: #005792; 
 }
 
 .quiz {
@@ -46,11 +47,11 @@ body {
 }
 
 .question, .option, .score {
-    font-size: 2em; /* 32px */
+    font-size: 2em; 
 }
 
 .option {
-    margin: 0.625em; /* 10px */
+    margin: 0.625em; 
 }
 
 .button-correct {
@@ -80,33 +81,32 @@ body {
     animation: spin 2s linear infinite;
 }
 
-/* Responsive adjustments */
-@media (max-width: 37.5em) { /* 600px */
+@media (max-width: 37.5em) { 
     .text-box-title, .text-box, .question, .option, .score {
-        font-size: 1.5em; /* Adjusted for readability on small screens */
+        font-size: 1.5em; 
     }
     .text-box {
         padding: 0.5em;
-        margin-bottom: 1em; /* Increase space between text boxes for better touch targets */
-        border-radius: 2.5em; /* Adjusted for a softer appearance on small screens */
+        margin-bottom: 1em;
+        border-radius: 2.5em; 
     }
     .get-quiz-button, .option {
-        font-size: 1.25em; /* Slightly larger font for better readability */
-        padding: 0.5em 1em; /* Adjust padding for a better touch target size */
-        margin: 0.5em 0; /* Add margin to options for better separation */
+        font-size: 1.25em; 
+        padding: 0.5em 1em; 
+        margin: 0.5em 0; 
     }
     .quiz {
         display: flex;
         flex-direction: column;
-        align-items: stretch; /* Ensure questions and options stretch to full container width */
+        align-items: stretch; 
     }
     .question {
-        margin-bottom: 0.5em; /* Add some space below each question for clarity */
+        margin-bottom: 0.5em; 
     }
     .option {
-        display: block; /* Ensure options are block-level for full width */
-        text-align: center; /* Center-align option text for better aesthetics */
-        margin-bottom: 0.5em; /* Add space below options for easier touch interaction */
+        display: block;
+        text-align: center;
+        margin-bottom: 0.5em;
     }
     #loading-icon {
         margin-top: 1em;

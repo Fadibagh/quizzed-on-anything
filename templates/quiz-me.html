@@ -22,7 +22,7 @@
             const topic = document.getElementById('quizTopic').value;
             document.getElementById('loading-icon').classList.remove('hidden');
 
-            fetch('https://quizzed-on-anything-90fedb3112ed.herokuapp.com/quiz', { // Change this URL to your deployed backend endpoint if not running locally
+            fetch('https://quizzed-on-anything-90fedb3112ed.herokuapp.com/quiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
