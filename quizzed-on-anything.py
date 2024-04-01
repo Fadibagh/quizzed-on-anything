@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 
 app = Flask(__name__)
-client = OpenAI()  # Initialize your OpenAI client here
+client = OpenAI()
 
 @app.route('/')
 def home():
