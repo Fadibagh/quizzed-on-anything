@@ -50,9 +50,5 @@ def generate_quiz():
 
     return jsonify({"quiz": questions})
 
-# For Vercel serverless deployment
-def handler(request, context):
-    return app(request, context) 
-
 if __name__ == '__main__':
     app.run(debug=True) 
