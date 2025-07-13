@@ -3,116 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>quizzed-on-anything</title>
+    <meta
+      name="description"
+      content="Generate custom AI-powered quizzes on any topic instantly"
+    />
+    <meta name="theme-color" content="#667eea" />
+    <title>Quizzed On Anything - AI-Powered Quiz Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/static/css/quiz-me.css" />
   </head>
-  <body>
-    <div class="container">
-      <h2 class="text-box-title">Quizzed On Anything!</h2>
-      <p class="description">
-        Hello and welcome to Quizzed On Anything. This is an interactive website
-        where given a topic, it uses chatgpt 3.5 turbo API to gather information
-        about the topic and return a multiple choice quiz. You can be quizzed on
-        anything! give it a try. Just type any topic that you would like to be
-        quizzed on in the text box below and click Get Quiz. Your score will be
-        displayed after you have completed your quiz.
+  <body class="dark">
+    <header class="header" role="banner">
+      <div class="header__brand">
+        <span class="header__logo" aria-label="App logo" tabindex="0">🧠</span>
+        <span class="header__title">Quizzed On Anything</span>
+      </div>
+      <div class="feedback-toggle">
+        <label class="toggle-label">
+          <input type="checkbox" id="feedback-mode" class="toggle-input" />
+          <span class="toggle-slider"></span>
+          <span class="toggle-text">Instant Feedback</span>
+        </label>
+      </div>
+    </header>
+
+    <main class="main" role="main">
+      <section class="intro">
+        <p class="intro__desc">
+          Welcome to <strong>Quizzed On Anything</strong>! Enter any topic below
+          and get a custom AI-generated multiple-choice quiz. Test your
+          knowledge and learn something new every time!
+        </p>
+        <div class="disclaimer">
+          <p class="disclaimer__text">
+            ⚠️ <strong>Note:</strong> This quiz is powered by GPT-3.5-turbo,
+            which has a knowledge cutoff date. Some information may be outdated,
+            incorrect, or incomplete.
+          </p>
+        </div>
+        <form
+          id="quiz-form"
+          class="form form--quiz"
+          autocomplete="off"
+          aria-label="Quiz topic form"
+        >
+          <div class="input-group">
+            <input
+              class="input input--topic"
+              type="text"
+              id="quizTopic"
+              placeholder="Enter a topic (e.g., Space, History, Science)..."
+              aria-label="Quiz topic"
+              required
+            />
+            <button class="btn btn--primary" type="submit">
+              <span>Generate Quiz</span>
+            </button>
+          </div>
+        </form>
+        <div id="loading-icon" class="loading hidden" aria-live="polite"></div>
+      </section>
+
+      <section class="quiz" id="quizContainer" aria-live="polite"></section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <p class="footer__text">
+        Made with <span aria-label="love">❤️</span> and AI • Powered by GPT-3.5
       </p>
-      <input
-        class="text-box"
-        type="text"
-        id="quizTopic"
-        placeholder="Enter a topic..."
-      />
-      <button class="get-quiz-button" onclick="getQuiz()">Get Quiz</button>
-      <div id="loading-icon" class="hidden"></div>
-    </div>
+      <p class="footer__contact">
+        Created by Fadi Baghdadi •
+        <a href="mailto:fadibagh@gmail.com">fadi2002.ba@gmail.com</a>
+      </p>
+    </footer>
 
-    <div class="quiz" id="quizContainer"></div>
-
-    <script>
-      function getQuiz() {
-        const topic = document.getElementById("quizTopic").value;
-        document.getElementById("loading-icon").classList.remove("hidden");
-
-        fetch("/quiz", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ topic: topic }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById("loading-icon").classList.add("hidden");
-            displayQuiz(data.quiz);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-
-      function displayQuiz(quiz) {
-        const container = document.getElementById("quizContainer");
-        container.innerHTML = ""; // Clear previous quiz content
-        let totalScore = 0;
-        let totalAnsweredQuestions = 0;
-
-        quiz.forEach((item, index) => {
-          const questionElem = document.createElement("div");
-          const questionParagraph = document.createElement("p");
-          questionParagraph.className = "question";
-          questionParagraph.innerHTML = `<strong>Question ${
-            index + 1
-          }:</strong> ${item.question}`;
-          questionElem.appendChild(questionParagraph);
-          const correct = item.correct_answer[0].toLowerCase();
-          const options = item.options.trim().split("\n");
-
-          options.forEach((optionText) => {
-            if (optionText.trim() === "") return;
-
-            const optionButton = document.createElement("button");
-            optionButton.textContent = optionText;
-            optionButton.className = "option";
-            optionButton.onclick = function () {
-              totalAnsweredQuestions++;
-
-              // disable all buttons when one of them is clicked
-              const allOptions = questionElem.querySelectorAll(".option");
-              allOptions.forEach((opt) => {
-                opt.disabled = true;
-              });
-
-              // checks if the button clicked is the right answer
-              if (optionText[0].toLowerCase() === correct) {
-                optionButton.classList.add("button-correct");
-                totalScore++;
-              } else {
-                optionButton.classList.add("button-wrong");
-                allOptions.forEach((opt) => {
-                  if (opt.textContent[0].toLowerCase() === correct) {
-                    opt.classList.add("button-correct");
-                  }
-                });
-              }
-              if (totalAnsweredQuestions === 6) {
-                const scoreElem = document.createElement("div");
-                const scoreDisplay = document.createElement("p");
-                scoreDisplay.className = "score";
-                scoreDisplay.innerHTML = `Score: ${totalScore} out of 6`;
-                scoreElem.appendChild(scoreDisplay);
-                container.appendChild(scoreElem);
-                window.scrollTo({
-                  top: document.body.scrollHeight,
-                  behavior: "smooth", // Optional: Adds a smooth scrolling effect
-                });
-              }
-            };
-            questionElem.appendChild(optionButton);
-          });
-          container.appendChild(questionElem);
-        });
-      }
-    </script>
+    <script src="/static/js/quiz-me.js"></script>
   </body>
 </html>
