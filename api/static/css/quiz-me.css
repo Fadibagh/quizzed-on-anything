@@ -1,0 +1,135 @@
+body {
+  background-color: #f0f4f8;
+  color: #333;
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+.description {
+  font-size: 1em;
+}
+
+.text-box-title {
+  font-size: 3em;
+  margin-bottom: 0.625em;
+  color: #005792;
+}
+
+.text-box,
+.quiz,
+.question,
+.option,
+.score {
+  background-color: #ffffff;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.get-quiz-button {
+  font-size: 1.5em;
+  padding: 0.625em 1.25em;
+  border: none;
+  border-radius: 5px;
+  background-color: #0077b6;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5em;
+}
+
+.get-quiz-button:hover {
+  background-color: #005792;
+}
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.question,
+.option,
+.score {
+  font-size: 2em;
+}
+
+.option {
+  margin: 0.625em;
+}
+
+.button-correct {
+  background-color: green;
+}
+
+.button-wrong {
+  background-color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-icon {
+  margin-top: 2em;
+  border: 0.25em solid #f3f3f3;
+  border-top: 0.25em solid #000000;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation: spin 2s linear infinite;
+}
+
+@media (max-width: 37.5em) {
+  .text-box-title,
+  .text-box,
+  .question,
+  .option,
+  .score {
+    font-size: 1.5em;
+  }
+  .text-box {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border-radius: 2.5em;
+  }
+  .get-quiz-button,
+  .option {
+    font-size: 1.25em;
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
+  }
+  .quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .question {
+    margin-bottom: 0.5em;
+  }
+  .option {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.5em;
+  }
+  #loading-icon {
+    margin-top: 1em;
+    width: 2em;
+    height: 2em;
+  }
+}

@@ -4,6 +4,7 @@ import os
 
 app = Flask(__name__)
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+
 @app.route('/')
 def home():
     return render_template('quiz-me.html')
@@ -49,7 +50,6 @@ def generate_quiz():
 
     return jsonify({"quiz": questions})
 
-
-
-if __name__ == '__main__':
-    app.run()
+# For Vercel serverless deployment
+def handler(request, context):
+    return app(request, context) 
